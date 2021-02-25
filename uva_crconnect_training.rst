@@ -79,7 +79,7 @@ Example
 
 Create a working directory in a suitable location
 
-.. code-block::
+.. code-block:: bash
 
     mkdir development
 
@@ -87,7 +87,7 @@ Create a working directory in a suitable location
 
 Clone CR Connect Workflow and the Stack Deploy scripts
 
-.. code-block::
+.. code-block:: bash
 
     git clone https://github.com/sartography/cr-connect-workflow.git
 
