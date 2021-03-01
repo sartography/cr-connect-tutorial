@@ -1,34 +1,59 @@
-==========
-CR Connect
-==========
+======================
+CR Connect Development
+======================
 
-This document serves as an overview for cr-connect development training for UVA. It will focus on cr-connect-workflow.
+This is an overview for the CR Connect Development Training for UVA. It will focus on building the development environment and working with the CR Connect Workflow code base.
 
-This documentation is Unix based, but you can develop in a Windows environment
+The examples are Unix based, but you can develop in a Windows environment.
+
+Currently, CR Connect requires Python 3.8.
+
+Before starting class, you should know how to:
+
+- run python 3 on your system, and
+- run pip, the python package installer, and
+- install pipenv using pip
+
+We will use pipenv to manage the CR Connect Workflow virtual environment and code requirements.
+
 
 ----------
+CR Connect
+----------
+
+CR Connect is a collection of three code bases; **CR Connect Front End**, **CR Connect BPMN**, and **CR Connect Workflow**, and a database for persistent storage.
+
+CR Connect Front End and CR Connect BPMN use the **Sartography Utilities** library.
+
+CR Connect Workflow uses the **SpiffWorkflow** workflow engine.
+
+There is a mock of **Protocol Builder** for development.
+
+For development, we use Postgres for a database.
+
+
 Code Bases
 ----------
 
 SpiffWorkflow
--------------
+`````````````
 https://github.com/sartography/SpiffWorkflow
 
 https://github.com/sartography/SpiffWorkflow.git
 
-Fork of SpiffWorkflow by user knipknap on github. It is a workflow engine implemented in Python.
-We only support BPMN.
+Fork of SpiffWorkflow by user knipknap on github. It is a workflow engine implemented in Python that runs our BPMN workflows.
+
 
 CR Connect Workflow
--------------------
+```````````````````
 https://github.com/sartography/cr-connect-workflow
 
 https://github.com/sartography/cr-connect-workflow.git
 
-API that talks to SpiffWorkflow. Written in Python.
+API that talks to SpiffWorkflow. Written in Python. This document focuses on CR Connect Workflow.
 
 CR Connect Frontend
--------------------
+```````````````````
 https://github.com/sartography/cr-connect-frontend
 
 https://github.com/sartography/cr-connect-frontend.git
@@ -36,7 +61,7 @@ https://github.com/sartography/cr-connect-frontend.git
 Front end for UVA that talks to the API. Written in Angular
 
 CR Connect BPMN
----------------
+```````````````
 https://github.com/sartography/cr-connect-bpmn
 
 https://github.com/sartography/cr-connect-bpmn.git
@@ -44,7 +69,7 @@ https://github.com/sartography/cr-connect-bpmn.git
 Workflow modeler. Creates BPMN and DMN XML. Can upload supporting documents. Written in Angular
 
 Protocol Builder Mock
----------------------
+`````````````````````
 https://github.com/sartography/protocol-builder-mock
 
 https://github.com/sartography/protocol-builder-mock.git
@@ -52,8 +77,9 @@ https://github.com/sartography/protocol-builder-mock.git
 A mock-up of Protocol Builder. Only meant to be used during development phase. Python and HTML
 
 Sartography Libraries
----------------------
+`````````````````````
 https://github.com/sartography/sartography-libraries
+
 https://github.com/sartography/sartography-libraries.git
 
 Libraries shared by cr-connect-frontend and cr-connect-bpmn. Written in Angular.
@@ -63,35 +89,58 @@ Libraries shared by cr-connect-frontend and cr-connect-bpmn. Written in Angular.
 Development Environment
 -----------------------
 
-Stack Deploy
-------------
+There are two parts to our development environment; CR Connect Workflow, and everything else.
 
-Stack Deploy is a Python script to bring up multiple code stacks using Docker Compose. You can use it to manage running the different pieces of CR Connect.
+CR Connect Workflow is the Python code we will modify. We need a local copy of it to work with.
 
-It uses docker images stored on
+Everything else includes CR Connect Front End, CR Connect BPMN, Protocol Builder Mock, and the Database.
 
-We will use it to manage everything except cr-connect-workflow, which we will manage ourselves to allow local development.
+We will manage CR Connect Workflow, and use Docker to manage everything else.
 
-Since we are editing cr-connect-workflow, we will clone that repository locally. Then we will run the stack deploy scripts to manage everything except cr-connect-workflow.
+Stack Deploy Generator
+----------------------
 
-Example
--------
+Stack Deploy Generator is a Python script `stackdeploy-generator.py` that generates a docker compose file from a template. We use the docker compose file to manage the CR Connect Application Stack.
+
+You can modify the output of Stack Deploy Generator--by passing arguments to the script or editing its default values, to fit your development process.
+
+The arguments are in `args.csv` and the default values are in `defaults.csv`.
+
+
+For class, we will use the Stack Deploy script to manage everything except CR Connect Workflow, which we will manage ourselves to allow local development.
+
+We will clone the CR Connect Workflow repository locally, and configure the stack deploy environment to work with our local copy of Workflow. Then, we can still use Stack Deploy to manage the rest of the stack.
+
+
+Deployment Example
+------------------
+
+Here is a step by step process for deploying CR Connect with Stack Deploy.
+
+Working Directory
+`````````````````
 
 Create a working directory in a suitable location
 
-.. code-block:: bash
+.. code-block::
 
     mkdir development
 
     cd development
 
+Clone from github
+`````````````````
+
 Clone CR Connect Workflow and the Stack Deploy scripts
 
-.. code-block:: bash
+.. code-block::
 
     git clone https://github.com/sartography/cr-connect-workflow.git
 
     git clone https://github.com/sartography/sartography-utils.git
+
+CR Connect Workflow
+```````````````````
 
 Set up CR Connect Workflow
 
@@ -101,12 +150,8 @@ Set up CR Connect Workflow
 
     pipenv install --dev
 
-Create a docker image for your local cr-connect-workflow
-
-.. code-block::
-
-    docker build -t cr-connect-workflow-dev .
-
+Run Stack Deploy Script
+```````````````````````
 
 Edit the docker-compose defaults in sartography utils
 
@@ -138,18 +183,153 @@ Create a docker-compose file from the sartography utils
 
 This creates the file cr-connect-docker-compose.yml and the directory you specified in PATH_BASE, along with a postgres directory in PATH_BASE
 
-Edit the docker compose file you created in the line above (cr-connect-docker-compose.yml) and change the **image** line in the backend section to point to the docker image you created for cr-connect-workflow above (cr-connect-workflow-dev).
+Modify Docker Compose File
+``````````````````````````
+
+Now, we need to remove information about the back end from the docker compose file since we are managing it ourselves.
+
+Edit the docker-compose file you just created `cr-connect-docker-compose.yml` and comment out the lines about the backend.
+
 
 .. code-block::
 
-      backend:
-        container_name: backend
+    #  backend:
+    #    container_name: backend
+    #    depends_on:
+    #       - db
+    #       - pb
+    #    image: cr-connect-workflow-dev
+    #    environment:
+    #      - APPLICATION_ROOT=/
+    #      - CORS_ALLOW_ORIGINS=localhost:5002,bpmn:5002,localhost:5004,frontend:5004,localhost:4200
+    #      - DB_HOST=db
+    #      - DB_NAME=crc_dev
+    #      - DB_PASSWORD=crc_pass
+    #      - DB_PORT=5432
+    #      - DB_USER=crc_user
+    #      - DEVELOPMENT=true
+    #      - LDAP_URL=mock
+    ##      - LDAP_URL=ldap.virginia.edu
+    #      - PB_BASE_URL=http://pb:5001/v2.0/
+    #      - PB_ENABLED=true
+    #      - PORT0=5000
+    #      - PRODUCTION=false
+    ##      - RESET_DB=true
+    ##     - ADMIN_UIDS=ajl2j,cah3us,cl3wf # uncomment this to make the default testing user NOT admin
+    #      - TESTING=false
+    #      - UPGRADE_DB=true
+    #    ports:
+    #      - "127.0.0.1:5000:5000"
+    #    command: ./wait-for-it.sh pb:5001 -t 0 -- ./docker_run.sh
+
+Note that your code may look different from mine.
+
+We also need to comment out 2 lines where bpmn and the front end depend on the backend.
+
+.. code-block::
+
+      bpmn:
+        container_name: bpmn
         depends_on:
            - db
+    #       - backend
            - pb
-        image: cr-connect-workflow-dev
 
-Start it all up
+
+.. code-block::
+
+      frontend:
+        container_name: frontend
+        depends_on:
+           - db
+    #       - backend
+        image: sartography/cr-connect-frontend:dev
+
+
+Modify CR Connect Workflow
+``````````````````````````
+
+We now need to modify CR Connect Workflow so it talks to the correct ports in the docker container.
+
+The defaults for the docker container are
+
+.. code-block::
+
+    # Backend: 5000
+    # Protocol builder : 5001
+    # Bpmn: 5002
+    # Db: 5003
+    # Frontend : 5004
+
+We only need to worry about 5003 for the database and 5004 for the front end. Everything else matches already.
+
+Instance Config
+```````````````
+
+Flask has a built-in mechanism for modifying your configuration for local development. You can put your modifications into a **config.py** file in the **instance** directory.
+
+Note that you may need to create the instance directory and config.py file.
+
+Flask will read from the config.py file after loading its default configuration. The instance configuration entries will override the default configuration.
+
+.. code-block::
+
+    cd ../../cr-connect-workflow
+
+Create the instance directory if it does not already exist.
+
+.. code-block::
+
+    mkdir instance
+
+Change to the instance directory
+
+.. code-block::
+
+    cd instance
+
+Create config.py if it does not already exist.
+
+.. code-block::
+
+    touch config.py
+
+Edit config.py
+``````````````
+
+These two lines tell the backend that the front end runs on port 5004, and to allow CORS for that port.
+
+.. code-block:: python
+
+    CORS_ALLOW_ORIGINS = re.split(r',\s*', environ.get('CORS_ALLOW_ORIGINS', default="localhost:4200, localhost:5002, localhost:5004"))
+    FRONTEND_AUTH_CALLBACK = environ.get('FRONTEND_AUTH_CALLBACK', default="http://localhost:5004/session")
+
+This tells the back end that the database runs on port 5003, and sets up SQLAlchemy to talk to that port.
+
+.. code-block:: python
+
+    DB_PORT = 5003
+    SQLALCHEMY_DATABASE_URI = environ.get(
+        'SQLALCHEMY_DATABASE_URI',
+        default="postgresql://%s:%s@%s:%s/%s" % (DB_USER, DB_PASSWORD, DB_HOST, DB_PORT, DB_NAME)
+    )
+
+
+Start Back End
+--------------
+
+Use pipenv to run the CR Connect Workflow Flask application
+
+.. code-block::
+
+    cd ..
+
+    pipenv run python run.py
+
+Docker Compose
+--------------
+
+Use docker-compose to run the rest of the CR Connect application stack.
 
 .. code-block::
 
@@ -161,17 +341,30 @@ Start it all up
 CR-Connect-Workflow
 -------------------
 
-CR-Connect-Workflow is the API for CR-Connect. It takes requests from the front-end, makes calls to SpiffWorkflow and other aspects of the API, and returns JSON.
+CR-Connect-Workflow is the API for CR-Connect. It takes requests from the front end, makes calls to SpiffWorkflow and other parts of the API, and returns JSON to the front end.
 
 API
 ---
 
-These are the actual API endpoints.
+This is the code for the api endpoints, along with admin and common which contain classes and methods used by the api enpoints.
+
+You can view the endpoints at http://localhost:5000/v1.0/ui after bringing up the stack.
+
+- admin
+- common
+- data_store
+- file
+- study
+- tools
+- user
+- workflow
+- workflow_sync
+
 
 Models
 ------
 
-Database models. Postgres.
+Database models. SQLAlchemy. We use Postgres for development.
 
 Scripts
 -------
@@ -261,3 +454,98 @@ Example code: tests/test_tutorial.py
             card_1 = f'{result.next_task.data["drawn_cards"][0]["value"]} of {result.next_task.data["drawn_cards"][0]["suit"]}'
             card_2 = f'{result.next_task.data["drawn_cards"][1]["value"]} of {result.next_task.data["drawn_cards"][1]["suit"]}'
             self.assertEqual(f'</H1>Good Bye</H1>\n\n<div><span>{card_1}</span></div>\n\n<div><span>{card_2}</span></div>\n', result.next_task.documentation)
+
+---------
+Api Error
+---------
+
+The API defines an exception class `ApiError` that we use to return a custom error message to the user. The front end is responsible for displaying the error message.
+
+We also define two error handlers, `handle_invalid_usage` and `handle_internal_server_error`, that return our errors in a response.
+
+Api Error
+---------
+
+The class is defined in api/common.py. It has attributes you can use to provide information to the user.
+
+Note that we set the status_code to 400 by default, which is bad request.
+
+Also note that code and message do not have defaults.
+
+.. code-block:: python
+
+    class ApiError(Exception):
+        def __init__(self, code, message, status_code=400,
+                     file_name="", task_id="", task_name="", tag="", task_data = {}):
+            self.status_code = status_code
+            self.code = code  # a short consistent string describing the error.
+            self.message = message  # A detailed message that provides more information.
+            self.task_id = task_id or ""  # OPTIONAL:  The id of the task in the BPMN Diagram.
+            self.task_name = task_name or ""  # OPTIONAL: The name of the task in the BPMN Diagram.
+            self.file_name = file_name or ""  # OPTIONAL: The file that caused the error.
+            self.tag = tag or ""  # OPTIONAL: The XML Tag that caused the issue.
+            self.task_data = task_data or ""  # OPTIONAL: A snapshot of data connected to the task when error ocurred.
+            if hasattr(g,'user'):
+                user = g.user.uid
+            else:
+                user = 'Unknown'
+            self.task_user = user
+            # This is for sentry logging into Slack
+            sentry_sdk.set_context("User", {'user': user})
+            Exception.__init__(self, self.message)
+
+CR Connect has different types of errors; errors that occur in the application, errors that occur during workflows, and errors that come from validating workflows.
+
+**Application errors** come from python code. We do not need to show the actual python error to the user. We want to give the user a helpful message.
+
+**Workflow errors** can happen because of a problem with our code or from a problem with the workflow. Usually, we do not want to send the stack trace to the end user.
+
+**Validation errors** are a little different. We **do** want to pass on the python error to the user, who in this case is a configurator who may need to see the python error to understand how to solve their problem.
+
+Application Errors
+------------------
+
+Application Errors are internal python errors from our application. As developers, we can use the stack trace produced from an error to debug our code, but they are not meant for the end user.
+
+Instead, we send the user a message that is more helpful to them.
+
+As an example, consider the first few lines of the `do_task` method in the email script located at crc/scripts/email.py:
+
+The email script requires two parameters; a subject, and an address or list of addresses.
+
+In do_task, we test whether we have two parameters. If not, we raise an error.
+
+.. code-block:: python
+
+    def do_task(self, task, study_id, workflow_id, *args, **kwargs):
+
+        if len(args) < 2:
+            raise ApiError(code="missing_argument",
+                           message="Email script requires a subject and at least one email address as arguments")
+
+Since ApiError does not set defaults for code and message, we provide them.
+
+
+The **code** is meant to be short and descriptive. By convention it is lower case, with underscores instead of spaces. It is not displayed to the user. It is designed to be parsed programmatically.
+
+The **message** is displayed to the user. It should describe the problem in human understandable terms. If known, it can offer a solution.
+
+.. image:: SendEmailErrorCropped33.png
+
+
+Workflow Errors
+---------------
+
+Workflow errors happen while a workflow is running. They can come from the SpiffWorkflow, or from CR Connect.
+
+We have two ApiError methods we can call
+
+
+Validation Errors
+-----------------
+
+Validation errors are a different type of user error. They occur when configurators validate their workflows using the shield icon in the configurator toolbar.
+
+In this case, we **do** want to send the stack trace to the user to help them troubleshoot their problem.
+
+For a validation example, consider the
