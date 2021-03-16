@@ -31,6 +31,8 @@ There is a mock of **Protocol Builder** for development.
 
 For development, we use Postgres for a database.
 
+.. image:: CR_Connect_stack.png
+
 
 Code Bases
 ----------
