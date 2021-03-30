@@ -358,6 +358,10 @@ Use docker-compose to run the rest of the CR Connect application stack.
     docker-compose -f cr-connect-docker-compose.yml up
 
 
+TODO:
+-----
+flask db migrations
+flask load-example-data
 
 -------------------
 CR-Connect-Workflow
