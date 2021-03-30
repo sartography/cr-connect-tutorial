@@ -122,7 +122,7 @@ Here is a step by step process for deploying CR Connect with Stack Deploy.
 Working Directory
 `````````````````
 
-Create a working directory in a suitable location
+Create a working directory in a suitable location.
 
 .. code-block::
 
@@ -130,10 +130,14 @@ Create a working directory in a suitable location
 
     cd development
 
+We will use `development` as the top level of our example directory structure.
+
 Clone from github
 `````````````````
 
-Clone CR Connect Workflow and the Stack Deploy scripts
+Clone CR Connect Workflow and the Stack Deploy scripts in the development directory.
+
+Directory: development
 
 .. code-block::
 
@@ -141,10 +145,12 @@ Clone CR Connect Workflow and the Stack Deploy scripts
 
     git clone https://github.com/sartography/sartography-utils.git
 
+This creates two directories; `development/cr-connect-workflow` and `development/sartography-utils`
+
 CR Connect Workflow
 ```````````````````
 
-Set up CR Connect Workflow
+First, we will set up CR Connect Workflow
 
 .. code-block::
 
@@ -152,14 +158,20 @@ Set up CR Connect Workflow
 
     pipenv install --dev
 
+Note:  If you use Visual Studio on Windows, and have trouble installing the python-Levenshtein package,
+you might need to download the build tools.
+https://visualstudio.microsoft.com/thank-you-downloading-visual-studio/?sku=BuildTools&rel=16
+
 Run Stack Deploy Script
 ```````````````````````
+
+Now, we will work on the deployment script in the development/sartography-utils directory.
 
 Edit the docker-compose defaults in sartography utils
 
 .. code-block::
 
-    cd ../sartography-utils/stackdeploy-generator/cr_connect
+    cd development/sartography-utils/stackdeploy-generator/cr_connect
 
 Change the PATH_BASE line in defaults.csv to something appropriate.
 
@@ -173,13 +185,13 @@ To something like
 
 .. code-block::
 
-    "PATH_BASE","/path/to/development/directory/above/docker-volumes/cr-connect/"
+    "PATH_BASE","/path/to/development/directory/docker-volumes/cr-connect/"
 
 Create a docker-compose file from the sartography utils
 
 .. code-block::
 
-    cd ..
+    cd development/sartography-utils/stackdeploy-generator/
 
     ./stackdeploy-generator.py -F cr_connect -c cr-connect-docker-compose.yml
 
@@ -276,7 +288,7 @@ Flask will read from the config.py file after loading its default configuration.
 
 .. code-block::
 
-    cd ../../cr-connect-workflow
+    cd development/cr-connect-workflow
 
 Create the instance directory if it does not already exist.
 
@@ -301,20 +313,28 @@ Edit config.py
 
 These two lines tell the backend that the front end runs on port 5004, and to allow CORS for that port.
 
-.. code-block:: python
+.. code-block::
 
     CORS_ALLOW_ORIGINS = re.split(r',\s*', environ.get('CORS_ALLOW_ORIGINS', default="localhost:4200, localhost:5002, localhost:5004"))
     FRONTEND_AUTH_CALLBACK = environ.get('FRONTEND_AUTH_CALLBACK', default="http://localhost:5004/session")
 
 This tells the back end that the database runs on port 5003, and sets up SQLAlchemy to talk to that port.
 
-.. code-block:: python
+.. code-block::
 
     DB_PORT = 5003
     SQLALCHEMY_DATABASE_URI = environ.get(
         'SQLALCHEMY_DATABASE_URI',
         default="postgresql://%s:%s@%s:%s/%s" % (DB_USER, DB_PASSWORD, DB_HOST, DB_PORT, DB_NAME)
     )
+
+We also need to import the definitions we just used. Add this to the top of config.py
+
+.. code-block::
+
+    import re
+    from os import environ
+    from config.default import DB_USER, DB_PASSWORD, DB_HOST, DB_NAME
 
 
 Start Back End
