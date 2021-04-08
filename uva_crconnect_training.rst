@@ -363,12 +363,14 @@ Use docker-compose to run the rest of the CR Connect application stack.
 TODO:
 -----
 
-flask db migrations
-flask load-example-data
+In Linux:
+
+1. flask db migrations
+2. flask load-example-data
 
 In Windows:
 
-1.	set env variable: set FLASK_APP=crc/__init__.py            ("Set" lists all variables)
+1.	set env variable: set FLASK_APP=crc/__init__.py            (just "Set" alone lists all variables)
 2.	pipenv run flask db upgrade
 3.	pipenv run flask load-example-data
 4.	\cr-connect-workflow>pipenv run flask db upgrade
