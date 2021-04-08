@@ -344,7 +344,7 @@ Use pipenv to run the CR Connect Workflow Flask application
 
 .. code-block::
 
-    cd ..
+    cd .. (cd to cr-connect-workflow)
 
     pipenv run python run.py
 
@@ -355,13 +355,24 @@ Use docker-compose to run the rest of the CR Connect application stack.
 
 .. code-block::
 
+    (cd to sartography-utils\stackdeploy-generator)
+
     docker-compose -f cr-connect-docker-compose.yml up
 
 
 TODO:
 -----
+
 flask db migrations
 flask load-example-data
+
+In Windows:
+
+1.	set env variable: set FLASK_APP=crc/__init__.py            ("Set" lists all variables)
+2.	pipenv run flask db upgrade
+3.	pipenv run flask load-example-data
+4.	\cr-connect-workflow>pipenv run flask db upgrade
+
 
 -------------------
 CR-Connect-Workflow
