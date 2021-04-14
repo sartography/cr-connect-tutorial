@@ -358,10 +358,35 @@ Use docker-compose to run the rest of the CR Connect application stack.
     docker-compose -f cr-connect-docker-compose.yml up
 
 
-TODO:
------
-flask db migrations
-flask load-example-data
+Setup Database
+--------------
+
+We need to update the database tables and seed them with some example data.
+
+From the development/cr-connect-workflow directory, run these commands.
+
+.. code-block::
+
+    flask db upgrade
+
+.. code-block::
+
+    flask load-example-data
+
+
+URLs
+----
+
+You should now be able to reach these URLs.
+
+`API <http://localhost:5000/v1.0/ui/>`_
+
+`Dashboard <http://localhost:5004/app/home>`_
+
+`Configurator <http://localhost:5002/bpmn/home>`_
+
+`PB Mock <http://localhost:5001>`_
+
 
 -------------------
 CR-Connect-Workflow
