@@ -94,12 +94,5 @@ And here it is running.
 
 .. image:: /_static/display_returned_cards.png
 
-You can get a copy of the bpmn for the workflow :download:`bpmn for the workflow </_static/tutorial.bpmn>`
-
------------------
-Make it a service
------------------
-
-Best practice for creating a script involves creating a service that does the work, and calling the service from our script.
-We cover this in the next section.
+You can find the :download:`bpmn for the workflow <https://github.com/sartography/cr-connect-tutorial/blob/main/_static/tutorial.bpmn>` in the repository.
 
