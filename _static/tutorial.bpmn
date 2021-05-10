@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:camunda="http://camunda.org/schema/1.0/bpmn" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" id="Definitions_1gfmps1" targetNamespace="http://bpmn.io/schema/bpmn" exporter="Camunda Modeler" exporterVersion="3.5.0">
+  <bpmn:process id="Process_Tutorial" name="Tutorial" isExecutable="true">
+    <bpmn:startEvent id="StartEvent_1">
+      <bpmn:outgoing>SequenceFlow_0wndmrt</bpmn:outgoing>
+    </bpmn:startEvent>
+    <bpmn:sequenceFlow id="SequenceFlow_0wndmrt" sourceRef="StartEvent_1" targetRef="Task_HowMany" />
+    <bpmn:sequenceFlow id="SequenceFlow_0f43jh1" sourceRef="Task_HowMany" targetRef="Task_GetCards" />
+    <bpmn:endEvent id="EndEvent_01xonb1">
+      <bpmn:incoming>SequenceFlow_1qys4ua</bpmn:incoming>
+    </bpmn:endEvent>
+    <bpmn:sequenceFlow id="SequenceFlow_1qys4ua" sourceRef="Task_GoodBye" targetRef="EndEvent_01xonb1" />
+    <bpmn:scriptTask id="Task_GetCards" name="Get Cards">
+      <bpmn:incoming>SequenceFlow_0f43jh1</bpmn:incoming>
+      <bpmn:outgoing>SequenceFlow_0gauryg</bpmn:outgoing>
+      <bpmn:script>drawn_cards = tutorial(cards=cards, decks=decks)</bpmn:script>
+    </bpmn:scriptTask>
+    <bpmn:manualTask id="Task_GoodBye" name="Say Good Bye">
+      <bpmn:documentation>&lt;/H1&gt;Good Bye&lt;/H1&gt;
+
+&lt;br&gt;
+&lt;div&gt;
+
+{% for drawn in drawn_cards %}
+&lt;div&gt;&lt;span&gt;{{ drawn.value }} of {{ drawn.suit }}&lt;/span&gt;&lt;/div&gt;
+
+{% endfor %}
+&lt;/div&gt;</bpmn:documentation>
+      <bpmn:incoming>SequenceFlow_0gauryg</bpmn:incoming>
+      <bpmn:outgoing>SequenceFlow_1qys4ua</bpmn:outgoing>
+    </bpmn:manualTask>
+    <bpmn:sequenceFlow id="SequenceFlow_0gauryg" sourceRef="Task_GetCards" targetRef="Task_GoodBye" />
+    <bpmn:userTask id="Task_HowMany" name="Ask How Many" camunda:formKey="HowManyForm">
+      <bpmn:extensionElements>
+        <camunda:formData>
+          <camunda:formField id="decks" label="How man decks?" type="long" defaultValue="1" />
+          <camunda:formField id="cards" label="How many cards?" type="long" defaultValue="1" />
+        </camunda:formData>
+      </bpmn:extensionElements>
+      <bpmn:incoming>SequenceFlow_0wndmrt</bpmn:incoming>
+      <bpmn:outgoing>SequenceFlow_0f43jh1</bpmn:outgoing>
+    </bpmn:userTask>
+  </bpmn:process>
+  <bpmndi:BPMNDiagram id="BPMNDiagram_1">
+    <bpmndi:BPMNPlane id="BPMNPlane_1" bpmnElement="Process_Tutorial">
+      <bpmndi:BPMNEdge id="SequenceFlow_0gauryg_di" bpmnElement="SequenceFlow_0gauryg">
+        <di:waypoint x="690" y="117" />
+        <di:waypoint x="750" y="117" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="SequenceFlow_1qys4ua_di" bpmnElement="SequenceFlow_1qys4ua">
+        <di:waypoint x="850" y="117" />
+        <di:waypoint x="912" y="117" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="SequenceFlow_0f43jh1_di" bpmnElement="SequenceFlow_0f43jh1">
+        <di:waypoint x="530" y="117" />
+        <di:waypoint x="590" y="117" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="SequenceFlow_0wndmrt_di" bpmnElement="SequenceFlow_0wndmrt">
+        <di:waypoint x="378" y="117" />
+        <di:waypoint x="430" y="117" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNShape id="_BPMNShape_StartEvent_2" bpmnElement="StartEvent_1">
+        <dc:Bounds x="342" y="99" width="36" height="36" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="EndEvent_01xonb1_di" bpmnElement="EndEvent_01xonb1">
+        <dc:Bounds x="912" y="99" width="36" height="36" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="ScriptTask_1rcznm2_di" bpmnElement="Task_GetCards">
+        <dc:Bounds x="590" y="77" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="ManualTask_0hw1sld_di" bpmnElement="Task_GoodBye">
+        <dc:Bounds x="750" y="77" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_0w32zba_di" bpmnElement="Task_HowMany">
+        <dc:Bounds x="430" y="77" width="100" height="80" />
+      </bpmndi:BPMNShape>
+    </bpmndi:BPMNPlane>
+  </bpmndi:BPMNDiagram>
+</bpmn:definitions>
