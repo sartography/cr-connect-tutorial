@@ -2,12 +2,12 @@
 Adding an API Endpoint
 ======================
 
-We have a service that returns playing cards.
+Currently, we have a service that returns playing cards.
 We can call this service from a script, and return the result in a workflow.
 
-We can also add an API endpoint that calls the service.
+Now, let's add an API endpoint that calls the service.
 
-There are two steps; defining the endpoint, and adding the Python code to support it.
+There are two steps in the process; defining the endpoint, and adding the Python code to support it.
 
 -------
 api.yml
@@ -15,16 +15,17 @@ api.yml
 
 The API endpoints are defined in `api.yml` in the `paths` section.
 
-Endpoints all have a path. Our path will be `get_cards`.
-Endpoints can have parameters. Our parameters are `cards` and `decks`.
-Our parameters are part of the query, are not required, and are integers.
+Endpoints all have a `path`. Our path will be `get_cards`.
+Endpoints can have `parameters`. Our parameters are `cards` and `decks`.
+Our parameters are included as part of the query.
+They are integers, and are not required.
 
 The request type for our endpoint is `GET`.
-We tell the endpoint what Python code to execute in the `operationId`.
-We can turn off `security` for our endpoint, and add a `Configurator Tools` tag.
+We tell the endpoint what Python code to execute in `operationId`.
+We will turn off `security` for our endpoint, and add a `Configurator Tools` tag.
 
 We must define a `200` response.
-We declare that we are returning an `array` of `PlayingCards`.
+In the response, declare that we are returning an `array` of `PlayingCards`.
 
 
 Here is what that code looks like:
@@ -91,6 +92,8 @@ The schema code looks like this:
           type: string
           example: 10
 
+We use the `Connexion <https://connexion.readthedocs.io/en/latest/>`_ framework for our API.
+
 You can check your YML code at https://editor.swagger.io/
 
 
@@ -100,10 +103,29 @@ We now need to write the Python code that should exist in `crc.api.tools.get_car
 crc.api.tools.get_cards
 -----------------------
 
-We have already done the heavy lifting, and we don't have to write much Python code.
+We have defined an API endpoint. Now, we need to write the Python code to support it.
 
-We will add a method named `get_cards` to `crc/api/tools.py`.
-It has to take in two parameters--cards and decks, make a call to our service, and return a list of playing cards.
+When we defined the get_cards endpoint, we set `operationId` to `crc.api.tools.get_cards`.
+
+.. code-block::
+
+        get:
+          operationId: crc.api.tools.get_cards
+
+This means that the API expects a method called `get_cards` in the `crc.api.tools` module.
+
+We need to add this method.
+
+get_cards
+---------
+
+We have already done the heavy lifting, so we don't have to write much Python code.
+
+get_cards has to:
+
+- take in two parameters; cards and decks,
+- make a call to our service, and
+- return a list of playing cards.
 
 .. code-block::
 
@@ -118,4 +140,6 @@ So, we had to give them default values in our method definition.
 Endpoints
 ---------
 
-If you restart your instance, you can view the endpoints at http://localhost:5000/v1.0/ui/#/Configurator%20Tools/
+At this point, we should have a functioning API endpoint that calls crc.api.tools.get_cards.
+
+If you restart your instance, you can view the endpoint at http://localhost:5000/v1.0/ui/#/Configurator%20Tools/
