@@ -1,7 +1,7 @@
-.. _index-installation:
+.. _index-environment:
 
 =======================
-Development Environment
+Environment
 =======================
 
 There are two parts to our development environment; CR Connect Workflow, and everything else.
