@@ -29,4 +29,4 @@ and use it to learn about the different parts of the CR Connect Workflow code ba
    01_scripts
    02_services
    03_api
-   04_errors
+   04_errors/00_index.rst
