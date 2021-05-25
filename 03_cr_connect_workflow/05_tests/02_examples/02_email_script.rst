@@ -31,7 +31,7 @@ with ... outbox
 
 When testing email, we don't want to actually send emails.
 
-Flask mail has a way to intercept the emails and show you the results.
+Flask mail has a way to intercept the emails and show you the results using a context manager.
 
 .. code-block::
 
