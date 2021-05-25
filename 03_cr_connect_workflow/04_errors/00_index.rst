@@ -10,7 +10,7 @@ It allows us to manage error reporting in one place, and format errors for the f
 .. toctree::
    :maxdepth: 2
 
-   01_api_error.rst
+   01_api_error
    02_helper_methods
    03_example_usage
    04_api_error_schema

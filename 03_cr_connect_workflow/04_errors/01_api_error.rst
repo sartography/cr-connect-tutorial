@@ -40,14 +40,14 @@ The other arguments allow us to pass along additional information depending on t
 Usage
 -----
 
-To use ApiError, you would first import it
+To use ApiError, you first need to import it.
 
 .. code-block::
 
   from crc.api.common import ApiError
 
 
-Then use it in a code block like a try/except,
+Then you can use it in a code block like a try/except,
 
 .. code-block::
 
