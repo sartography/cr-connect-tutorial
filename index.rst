@@ -9,7 +9,7 @@ There is a section on installation, but the main purpose is to introduce the CR 
 to development.
 
 .. toctree::
-   :maxdepth: 4
+   :maxdepth: 5
    :caption: Contents:
 
    01_overview/00_index
