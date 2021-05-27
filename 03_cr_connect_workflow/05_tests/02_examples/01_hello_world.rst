@@ -1,3 +1,4 @@
+===========
 Hello World
 ===========
 
@@ -7,6 +8,7 @@ Then, we can test the new feature by running the workflow and making assertions 
 
 Here is a simple test of a workflow.
 
+----
 Code
 ----
 
@@ -30,6 +32,7 @@ Code
 
             self.assertEqual('Hello asdf', second_task.documentation)
 
+-----
 Setup
 -----
 
@@ -56,6 +59,7 @@ You can have more than one test method in a test class.
 Each test method must begin with **test_**.
 
 
+------
 Detail
 ------
 

@@ -1,6 +1,6 @@
---------------
+==============
 Example Script
---------------
+==============
 
 Create a script that accepts keyword arguments, calls an external api using the arguments, and returns a result.
 

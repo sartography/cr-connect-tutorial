@@ -1,7 +1,8 @@
---------
+========
 ApiError
---------
+========
 
+----------
 Definition
 ----------
 
@@ -37,6 +38,7 @@ The other arguments allow us to pass along additional information depending on t
         self.task_user = user
 
 
+-----
 Usage
 -----
 

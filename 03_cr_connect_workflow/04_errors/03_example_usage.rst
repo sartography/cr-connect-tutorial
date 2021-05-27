@@ -1,7 +1,8 @@
--------------
+=============
 Example Usage
--------------
+=============
 
+---------------
 Using from_task
 ---------------
 
@@ -31,6 +32,7 @@ We also catch a general Exception error and log it.
             app.logger.error(str(e), exc_info=True)
 
 
+----------------------
 Call ApiError directly
 ----------------------
 

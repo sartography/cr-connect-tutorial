@@ -1,6 +1,6 @@
-----------------
+================
 Example Workflow
-----------------
+================
 
 Here is a simple workflow you can use to call this script.
 

@@ -1,6 +1,6 @@
-------------------------
+==============
 Helper Methods
-------------------------
+==============
 
 ApiError has 2 useful methods; **from_task** and **from_task_spec**.
 
@@ -11,6 +11,7 @@ TODO: task vs task spec
 
 Notice that these are class methods.
 
+---------
 from_task
 ---------
 
@@ -31,6 +32,7 @@ In addition to `code` and `message`, from_task requires a **task** argument.
         return instance
 
 
+--------------
 from_task_spec
 --------------
 

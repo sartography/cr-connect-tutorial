@@ -1,6 +1,6 @@
----------
+=========
 Endpoints
----------
+=========
 
 At this point, we should have a functioning API endpoint that calls crc.api.tools.get_cards.
 

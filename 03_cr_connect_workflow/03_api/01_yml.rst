@@ -1,8 +1,12 @@
--------
-api.yml
--------
+===================
+Define API Endpoint
+===================
 
 The API endpoints are defined in `api.yml` in the `paths` section.
+
+----------
+Definition
+----------
 
 Endpoints all have a `path`. Our path will be `get_cards`.
 Endpoints can have `parameters`. Our parameters are `cards` and `decks`.
@@ -55,6 +59,10 @@ Here is what that code looks like:
                     items:
                     $ref: "#/components/schemas/PlayingCards"
 
+------
+Schema
+------
+
 We need to define the schema for PlayingCards.
 
 Our playing cards have two properties; suit and value.
@@ -84,3 +92,12 @@ The schema code looks like this:
 We use the `Connexion <https://connexion.readthedocs.io/en/latest/>`_ framework for our API.
 
 You can check your YML code at https://editor.swagger.io/
+
+
+-----------
+Python Code
+-----------
+
+In our definition, we defined the **operationId** and gave it the value **crc.api.tools.get_cards**.
+
+We now need to write the Python code that should exist in `crc.api.tools.get_cards`.

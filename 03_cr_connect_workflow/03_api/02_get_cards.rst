@@ -1,10 +1,8 @@
-We now need to write the Python code that should exist in `crc.api.tools.get_cards`.
+=======================
+Get Cards
+=======================
 
------------------------
-crc.api.tools.get_cards
------------------------
-
-We have defined an API endpoint. Now, we need to write the Python code to support it.
+We defined an API endpoint. Now, we need to write the Python code to support it.
 
 When we defined the get_cards endpoint, we set `operationId` to `crc.api.tools.get_cards`.
 
@@ -17,6 +15,7 @@ This means that the API expects a method called `get_cards` in the `crc.api.tool
 
 We need to add this method.
 
+---------
 get_cards
 ---------
 

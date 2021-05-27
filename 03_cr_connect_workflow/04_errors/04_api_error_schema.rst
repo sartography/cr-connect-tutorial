@@ -1,6 +1,6 @@
---------------
+==============
 ApiErrorSchema
---------------
+==============
 
 CR Connect Workflow defines another class in crc.api.common that helps us format ApiError output as JSON so we can return it to the frontend
 

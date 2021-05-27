@@ -1,3 +1,4 @@
+============
 Email Script
 ============
 
@@ -6,6 +7,7 @@ and the scaffolding available in BaseTest.
 
 These next examples test the email script, and they each show us something more than the basics.
 
+----------
 Validation
 ----------
 
@@ -26,6 +28,7 @@ It shows us how to call an API endpoint.
             rv = self.app.get('/v1.0/workflow-specification/%s/validate' % spec_model.id, headers=self.logged_in_headers())
             self.assertEqual([], rv.json)
 
+---------------
 with ... outbox
 ---------------
 
@@ -52,6 +55,7 @@ Flask mail has a way to intercept the emails and show you the results using a co
             self.assertEqual(['test@example.com'], outbox[0].recipients)
             self.assertIn('Thank you for using this email example', outbox[0].body)
 
+---------
 Exception
 ---------
 
@@ -67,6 +71,7 @@ We can test for error conditions.
             self.complete_form(workflow, first_task, {'recipients': 'test@example'})
 
 
+--------
 Add data
 --------
 

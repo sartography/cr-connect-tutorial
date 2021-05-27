@@ -1,6 +1,6 @@
---------------------
+====================
 Unhandled Exceptions
---------------------
+====================
 
 CR Connect Workflow uses a feature of flask to capture unhandled exceptions.
 In crc.api.common, we define a handler for InternalServerError and add a call to ApiError.
