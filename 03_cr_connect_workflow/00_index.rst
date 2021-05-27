@@ -26,8 +26,8 @@ and use it to learn about the different parts of the CR Connect Workflow code ba
 .. toctree::
    :maxdepth: 2
 
-   01_scripts
-   02_services
-   03_api
+   01_scripts/00_index.rst
+   02_services/00_index.rst
+   03_api/00_index.rst
    04_errors/00_index.rst
    05_tests/00_index.rst
