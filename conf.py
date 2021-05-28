@@ -57,4 +57,5 @@ html_static_path = ['_static']
 html_theme_options = {
     'fixed_sidebar': True,
     'show_relbars': True,
+    'sidebar_width': '225px',
 }
