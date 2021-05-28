@@ -10,8 +10,11 @@ to development.
 
 .. toctree::
    :maxdepth: 5
-   :caption: Contents:
 
    01_overview/00_index
    02_environment/00_index
+   021_environment/00_index
    03_cr_connect_workflow/00_index
+   04_pb_mock/00_index
+   05_cr_connect_bpmn/00_index
+   06_cr_connect_frontend/00_index
