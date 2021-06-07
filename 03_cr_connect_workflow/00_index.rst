@@ -31,3 +31,4 @@ and use it to learn about the different parts of the CR Connect Workflow code ba
    03_api/00_index.rst
    04_errors/00_index.rst
    05_tests/00_index.rst
+   06_models/00_index.rst
