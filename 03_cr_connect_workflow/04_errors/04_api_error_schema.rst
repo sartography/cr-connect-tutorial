@@ -1,3 +1,5 @@
+.. _api-error-schema:
+
 ==============
 ApiErrorSchema
 ==============

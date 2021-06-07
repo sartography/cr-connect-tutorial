@@ -39,6 +39,6 @@ In the same file, we also define **DataStoreSchema**, which we use to serialize 
             sqla_session = db.session
 
 
-Note that this is the same way we serialized the response for ApiError in :ref:`api-error-schema-label`.
+Note that this is the same way we serialized the response for ApiError in :ref:`api-error-schema`.
 
 For more information about Marshmallow, see the `documentation <https://marshmallow-sqlalchemy.readthedocs.io/en/latest/>`_.
