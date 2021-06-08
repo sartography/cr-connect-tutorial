@@ -13,5 +13,4 @@ to development.
 
    01_overview/00_index
    02_environment/00_index
-   021_environment/00_index
    03_cr_connect_workflow/00_index
