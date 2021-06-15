@@ -1,8 +1,8 @@
-=======
-Running
-=======
+================
+Running Workflow
+================
 
-And here it is running.
+And here is the running workflow.
 
 .. image:: /_static/03/01/start_workflow.png
 

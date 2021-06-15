@@ -2,12 +2,23 @@
 Example Script
 ==============
 
+----
+Goal
+----
+
 Create a script that accepts keyword arguments, calls an external api using the arguments, and returns a result.
+
+-----
+Setup
+-----
 
 My data source is a simple API found at https://deckofcardsapi.com that returns cards drawn from one or more decks of playing cards.
 
 My script accepts two keyword arguments; cards and decks.
 
+-------
+Example
+-------
 
 Example code: crc/scripts/tutorial.py
 
@@ -46,12 +57,24 @@ Example code: crc/scripts/tutorial.py
 
             return drawn_cards
 
+-----------
+Explanation
+-----------
 
-First, I create an empty list of drawn_cards, and pull cards and decks from the keyword arguments.
-Cards and decks both default to 1 if they don't exist as keyword arguments.
+First, I create a class that extends the Script class in crc.scripts.script.
 
-I make an API call to get a `deck_id`, and then make another call with the deck_id to get a `card_response`.
+The **get_description** method returns a string describing the script. This is for configurators.
 
-From the card_response, I build and return a list of drawn_cards.
+The **do_task_validate_only** method calls do_task.
 
-We have a script we can call from a workflow. Now we have to build the workflow.
+In **do_task** we have the actual code that runs when our script is called.
+
+The do_task method accepts two keyword arguments; cards and decks.
+
+We use those arguments to call the remote API, parse the response, and return a list of cards.
+
+----
+Next
+----
+
+Now that we have a script we can call from a workflow, we have to build the workflow.
