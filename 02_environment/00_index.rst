@@ -4,10 +4,7 @@
 Environment
 =======================
 
-In this section, we install a development environment for CRConnect.
-This includes four code bases and
-
-This section covers how to install a development environment for developing CR Connect.
+In this section, we set up a development environment for CRConnect.
 
 .. Note::
 
