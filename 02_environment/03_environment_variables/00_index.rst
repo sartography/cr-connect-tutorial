@@ -33,7 +33,7 @@ You can set environment variables for the current session.
     $ export DB_USER=crc_user
     $ export DB_PASS=crc_pass
 
-They will be available system wide, but will only be available for your current shell session.
+When you **export** environment variables like this, they are available system wide, but only for your current shell session.
 
 You can see them in your environment variables:
 
@@ -53,7 +53,7 @@ Another option--and the one we use, is to set these environment variables in a *
 
     echo -e "DB_USER=crc_user\nDB_PASS=crc_pass" > .env
 
-This creates a file with the two environment variables
+This creates a file with the two environment variables.
 
 .. code-block::
 
@@ -61,7 +61,7 @@ This creates a file with the two environment variables
     DB_USER=crc_user
     DB_PASS=crc_pass
 
-This way, the environment variables are available to all of your shell sessions, and they are restricted to the current directory.
+When you create a **.env** file in a directory, the environment variables are limited to that directory.
 
 Notice that they are not in your global environment.
 
