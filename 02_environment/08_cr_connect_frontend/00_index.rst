@@ -13,6 +13,3 @@ From the **/development/cr-connect-frontend** directory:
 .. code-block::
 
     npm install
-
-    ng serve
-

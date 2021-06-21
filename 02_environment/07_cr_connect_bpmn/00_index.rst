@@ -13,7 +13,3 @@ From the **/development/cr-connect-bpmn** directory:
 .. code-block::
 
     npm install
-
-    ng serve
-
-

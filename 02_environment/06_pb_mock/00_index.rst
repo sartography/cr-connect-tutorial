@@ -14,6 +14,5 @@ From the **/development/protocol-builder-mock** directory:
 
     pipenv install --dev
 
-    pipenv run python run.py
 
 
