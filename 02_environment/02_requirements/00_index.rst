@@ -38,6 +38,12 @@ node.js
 
 You can download node.js from their `download page <https://nodejs.org/en/download/>`_
 
+You can check your installation of npm.
+
+.. code-block::
+
+    npm help
+
 Angular
 -------
 
