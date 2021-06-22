@@ -10,6 +10,7 @@ One of the best ways to learn about writing tests is to look at existing tests.
    :maxdepth: 2
 
    01_hello_world
-   02_email_script
-   03_call_api
-   04_mock_data
+   02_call_script
+   03_email_script
+   04_call_api
+   05_mock_data
