@@ -8,21 +8,15 @@ The test directory has 6 subdirectories; **data**, **emails**, **files**, **ldap
 
 .. code-block::
 
-  /tests
-   |____data
-   |
-   |----emails
-   |
-   |----files
-   |
-   |----ldap
-   |
-   |----study
-   |
-   |----workflow
-   |
-   |----base_test.py
-   ...
+    tests/
+        data/
+        emails/
+        files/
+        ldap/
+        study/
+        workflow/
+        base_test.py
+    ...
 
 The `data` directory holds workflows (BPMN files) for tests.
 
