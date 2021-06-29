@@ -13,4 +13,4 @@ We use Alembic for migrations, and Marshmallow for data serialization.
 
    01_sqlalchemy
    02_serialization
-   03_migrations
+   03_migrations/00_index.rst
