@@ -28,7 +28,7 @@ In this section, we set up a development environment for CRConnect.
 What follows is a step by step process for installing the code bases.
 
 .. toctree::
-   :maxdepth: 2
+   :maxdepth: 3
 
    01_working_directory/00_index
    02_requirements/00_index

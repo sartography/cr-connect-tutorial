@@ -17,7 +17,7 @@ We only need to make sure that the script *can* run here. We don't want to make 
 The do_task method is where we put the code we need to achieve our task.
 
 .. toctree::
-   :maxdepth: 2
+   :maxdepth: 3
 
    01_script
    02_workflow
