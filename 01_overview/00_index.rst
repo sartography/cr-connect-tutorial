@@ -18,10 +18,14 @@ Big Picture
 
 CR Connect is a collection of code and data bases.
 
-.. image:: /_static/CR_Connect_stack.png
+.. image:: /_static/01/CR_Connect_stack.png
 
 
----------------
+------------
+Repositories
+------------
+
+
 CR Connect BPMN
 ---------------
 
@@ -36,7 +40,6 @@ Can upload supporting documents.
 https://github.com/sartography/cr-connect-bpmn
 
 
--------------------
 CR Connect Frontend
 -------------------
 
@@ -51,7 +54,6 @@ Talks to the API.
 https://github.com/sartography/cr-connect-frontend
 
 
--------------------
 CR Connect Workflow
 -------------------
 
@@ -66,7 +68,6 @@ Uses the SpiffWorkflow workflow engine.
 https://github.com/sartography/cr-connect-workflow
 
 
--------------
 SpiffWorkflow
 -------------
 
@@ -79,7 +80,6 @@ Runs BPMN workflows.
 https://github.com/sartography/SpiffWorkflow
 
 
----------------------
 Protocol Builder Mock
 ---------------------
 
@@ -92,7 +92,6 @@ Only meant to be used during development phase.
 https://github.com/sartography/protocol-builder-mock
 
 
----------------------
 Sartography Libraries
 ---------------------
 Libraries shared by cr-connect-frontend and cr-connect-bpmn.
@@ -102,7 +101,6 @@ Written in Angular.
 https://github.com/sartography/sartography-libraries
 
 
----------
 Databases
 ---------
 
