@@ -55,6 +55,8 @@ There are four databases; **crc_dev**, **crc_test**, **pb**, and **pb_test**.
 
 The databases ending in **_test** are used when we run tests.
 
+.. _Initialize:
+
 ----------
 Initialize
 ----------
