@@ -1,0 +1,15 @@
+div#cr-connect-bpmn h2, div#cr-connect-frontend h2, div#sartography-libraries h2 {
+    color: green
+}
+
+div#spiffworkflow h2 {
+    color: orange
+}
+
+div#protocol-builder-mock h2 {
+    color: red
+}
+
+div#databases h2 {
+    color: blue
+}
