@@ -8,32 +8,32 @@ You can see the current revision.
 
 .. code-block::
 
-    pipenv run flask db current
+    flask db current
 
 You can see the revision history order.
 
 .. code-block::
 
-    pipenv run flask db history
+    flask db history
 
 
 You can run an upgrade.
 
 .. code-block::
 
-    pipenv run flask db upgrade
+    flask db upgrade
 
 You can back out of an upgrade.
 
 .. code-block::
 
-    pipenv run flask db downgrade
+    flask db downgrade
 
 To see more about the flask db command, use the help flag.
 
 .. code-block::
 
-    pipenv run flask db --help
+    flask db --help
 
 
 .. Note::
@@ -42,5 +42,5 @@ To see more about the flask db command, use the help flag.
 
     .. code-block::
 
-        pipenv run flask db upgrade
+        flask db upgrade
 
